@@ -36,8 +36,8 @@ class MyStreamListener(tw.StreamListener):
                    code = eval(message.lstrip('@pybotexec evaluate'))
                 print(code)
                 print('@'+user_screen_name+'here is your computation: '+ str(code))
-                api.update_status('@'+user_screen_name+'here is your computation: '+ str(code), id)
-                print('@'+user_screen_name+'here is your computation: '+ str(code))
+                api.update_status('@'+user_screen_name+' return '+ str(code), id)
+                print('@'+user_screen_name+' return '+ str(code))
                 #api.retweet(id)
         except:
             print('Exception!')
