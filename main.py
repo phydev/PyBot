@@ -19,17 +19,17 @@ class MyStreamListener(tw.StreamListener):
     def on_status(self, status):
 
         user = status.user.screen_name
+        user_id = api.get_user(screen_name = user)
         id = status.id
         url = 'https://twitter.com/' + user + '/status/' + str(id)
  
 
-        wall = False
+        
         try:
             status_ext = api.get_status(id=id, tweet_mode='extended')
             message = status_ext.full_text.lower()
             print(message)
-
-            if status.user.id==1009108514655096832:
+            if user_id==1009108514655096832:
                 code = eval(message.lstrip('@PyBotExec >>'))
                 api.update_status('@'+user+'here is your computation: '+code, id)
                 print('@'+user+'here is your computation: '+code)
