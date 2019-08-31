@@ -41,7 +41,7 @@ class MyStreamListener(tw.StreamListener):
                 elif 'evaluate' in message:
                    code = eval(message.lstrip('@pybotexec evaluate'))
                 elif 'plot' in message:
-                   x = np.linspace(0,100)
+                   x = np.linspace(0,100,200)
                    y = eval(message.lstrip('@pybotexec plot'))
                    plt2file(x,y)
                    api.update_with_media('graph.png', '@'+user_screen_name+' Here you go!')
