@@ -23,41 +23,25 @@ class MyStreamListener(tw.StreamListener):
         user = api.get_user(screen_name = user_screen_name)
         id = status.id
         url = 'https://twitter.com/' + user_screen_name + '/status/' + str(id)
- 
-        status_ext = api.get_status(id=id, tweet_mode='extended')
-        message = status_ext.full_text.lower()
-        print(message)
-        print(user.id==1009108514655096832)
-        if user.id==1009108514655096832:
-            if 'run' in message:
-               code = exec(message.lstrip('@PyBotExec run'))
-            elif 'evaluate' in message:
-               code = eval(message.lstrip('@PyBotExec evaluate'))
-            print(code)
-            print('@'+user_screen_name+'here is your computation: '+ str(code))
-            api.update_status('@'+user_screen_name+'here is your computation: '+ str(code), id)
-            print('@'+user_screen_name+'here is your computation: '+ str(code))
-            #api.retweet(id)
         
-        #try:
-        #    status_ext = api.get_status(id=id, tweet_mode='extended')
-        #    message = status_ext.full_text.lower()
-        #    print(message)
-        #    print(user.id==1009108514655096832)
-        #    if user.id==1009108514655096832:
-        #        if 'run' in message:
-        #           code = exec(message.lstrip('@PyBotExec run'))
-        #        elif 'evaluate' in message:
-        #           code = eval(message.lstrip('@PyBotExec evaluate'))
-        #        print(code)
-        #        print('@'+user_screen_name+'here is your computation: '+ str(code))
-        #        api.update_status('@'+user_screen_name+'here is your computation: '+ str(code), id)
-        #        print('@'+user_screen_name+'here is your computation: '+ str(code))
-        #        #api.retweet(id)
-
-        #except:
-        #    print('Exception!')
-        #    pass
+        try:
+            status_ext = api.get_status(id=id, tweet_mode='extended')
+            message = status_ext.full_text.lower()
+            print(message)
+            print(user.id==1009108514655096832)
+            if user.id==1009108514655096832:
+                if 'run' in message:
+                   code = exec(message.lstrip('@pybotexec run'))
+                elif 'evaluate' in message:
+                   code = eval(message.lstrip('@pybotexec evaluate'))
+                print(code)
+                print('@'+user_screen_name+'here is your computation: '+ str(code))
+                api.update_status('@'+user_screen_name+'here is your computation: '+ str(code), id)
+                print('@'+user_screen_name+'here is your computation: '+ str(code))
+                #api.retweet(id)
+        except:
+            print('Exception!')
+            pass
   
 
 
