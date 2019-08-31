@@ -30,7 +30,7 @@ class MyStreamListener(tw.StreamListener):
             print(message)
 
             if id==1009108514655096832:
-                code = eval(message.lstrip('@pybot >>'))
+                code = eval(message.lstrip('@PyBotExec >>'))
                 api.update_status('@'+user+'here is your computation: '+code, id)
                 print('@'+user+'here is your computation: '+code)
                 #api.retweet(id)
