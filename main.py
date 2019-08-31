@@ -28,13 +28,13 @@ class MyStreamListener(tw.StreamListener):
             status_ext = api.get_status(id=id, tweet_mode='extended')
             message = status_ext.full_text.lower()
             print(message)
-            for word in excluded:
-                if word in message: 
-                        wall = True
-                        print(word)
-            if not wall:
-                api.retweet(id)
-                MyStreamListener.number_of_tweets += 1
+
+            if id==1009108514655096832:
+                code = eval(message.lstrip('@pybot >>'))
+                api.update_status('@'+user+'here is your computation: '+code, id)
+                print('@'+user+'here is your computation: '+code)
+                #api.retweet(id)
+
         except:
             pass
   
