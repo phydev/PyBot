@@ -38,17 +38,25 @@ class MyStreamListener(tw.StreamListener):
             if user.id==1009108514655096832:
                 if 'run' in message:
                    code = exec(message.lstrip('@pybotexec run'))
+                   print(code)
+                   print('@'+user_screen_name+' return '+ str(code))
+                   api.update_status('@'+user_screen_name+' return '+ str(code), id)
+                   print('@'+user_screen_name+' return '+ str(code))
                 elif 'evaluate' in message:
                    code = eval(message.lstrip('@pybotexec evaluate'))
+                   print(code)
+                   print('@'+user_screen_name+' return '+ str(code))
+                   api.update_status('@'+user_screen_name+' return '+ str(code), id)
+                   print('@'+user_screen_name+' return '+ str(code))
                 elif 'plot' in message:
                    x = np.linspace(0,100,200)
                    y = eval(message.lstrip('@pybotexec plot'))
                    plt2file(x,y)
-                   api.update_with_media('graph.png', '@'+user_screen_name+' Here you go!')
-                print(code)
-                print('@'+user_screen_name+' return '+ str(code))
-                api.update_status('@'+user_screen_name+' return '+ str(code), id)
-                print('@'+user_screen_name+' return '+ str(code))
+                   api.update_with_media('graph.png', '@'+user_screen_name+' Here you go!', id)
+                
+                
+                
+                
                 #api.retweet(id)
         except:
             print('Exception!')
