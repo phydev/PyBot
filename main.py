@@ -1,5 +1,6 @@
 import tweepy as tw
 import numpy as np
+import matplotlib.pyplot as plt
 from os import environ
 
 
@@ -12,6 +13,11 @@ auth = tw.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tw.API(auth)
 
+def plt2file(x,y):
+    plt.plot(x,y)
+    plt.savefig('graph.png',dpi=300)
+    return
+    
 
 
 class MyStreamListener(tw.StreamListener):
@@ -34,8 +40,13 @@ class MyStreamListener(tw.StreamListener):
                    code = exec(message.lstrip('@pybotexec run'))
                 elif 'evaluate' in message:
                    code = eval(message.lstrip('@pybotexec evaluate'))
+                elif 'plot' in message:
+                   x = np.linspace(0,100)
+                   y = eval(message.lstrip('@pybotexec plot'))
+                   plt2file(x,y)
+                   api.update_with_media('graph.png', '@'+user_screen_name+' Here you go!')
                 print(code)
-                print('@'+user_screen_name+'here is your computation: '+ str(code))
+                print('@'+user_screen_name+' return '+ str(code))
                 api.update_status('@'+user_screen_name+' return '+ str(code), id)
                 print('@'+user_screen_name+' return '+ str(code))
                 #api.retweet(id)
