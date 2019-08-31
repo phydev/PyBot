@@ -19,9 +19,9 @@ class MyStreamListener(tw.StreamListener):
     def on_status(self, status):
 
         user_screen_name = status.user.screen_name
-        user = api.get_user(screen_name = user)
+        user = api.get_user(screen_name = user_screen_name)
         id = status.id
-        url = 'https://twitter.com/' + user + '/status/' + str(id)
+        url = 'https://twitter.com/' + user_screen_name + '/status/' + str(id)
  
 
         
