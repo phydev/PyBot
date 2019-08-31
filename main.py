@@ -29,7 +29,7 @@ class MyStreamListener(tw.StreamListener):
             message = status_ext.full_text.lower()
             print(message)
 
-            if id==1009108514655096832:
+            if status.user.id==1009108514655096832:
                 code = eval(message.lstrip('@PyBotExec >>'))
                 api.update_status('@'+user+'here is your computation: '+code, id)
                 print('@'+user+'here is your computation: '+code)
