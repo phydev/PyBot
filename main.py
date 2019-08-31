@@ -35,7 +35,8 @@ class MyStreamListener(tw.StreamListener):
                    code = exec(message.lstrip('@PyBotExec run'))
                 elif 'evaluate' in message:
                    code = eval(message.lstrip('@PyBotExec evaluate'))
-               
+                print(code)
+                print('@'+user_screen_name+'here is your computation: '+ str(code))
                 api.update_status('@'+user_screen_name+'here is your computation: '+ str(code), id)
                 print('@'+user_screen_name+'here is your computation: '+ str(code))
                 #api.retweet(id)
