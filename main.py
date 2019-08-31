@@ -29,8 +29,13 @@ class MyStreamListener(tw.StreamListener):
             status_ext = api.get_status(id=id, tweet_mode='extended')
             message = status_ext.full_text.lower()
             print(message)
+            print(user_id==1009108514655096832)
             if user_id==1009108514655096832:
-                code = eval(message.lstrip('@PyBotExec >>'))
+                if 'run' in message:
+                   code = exec(message.lstrip('@PyBotExec run'))
+                elif 'evaluate' in message:
+                   code = eval(message.lstrip('@PyBotExec evaluate'))
+               
                 api.update_status('@'+user+'here is your computation: '+code, id)
                 print('@'+user+'here is your computation: '+code)
                 #api.retweet(id)
@@ -45,6 +50,6 @@ class MyStreamListener(tw.StreamListener):
 myStreamListener = MyStreamListener()
 myStream = tw.Stream(auth = api.auth, listener=myStreamListener, tweet_mode='extended')
 
-track = ['@PyBotExec']
+track = ['@PyBotExec ']
 
 myStream.filter(track=track, follow='1009108514655096832')
