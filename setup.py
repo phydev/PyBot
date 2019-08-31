@@ -13,5 +13,5 @@ setup(
     license = "GNU GPLv3",
     platform = "Python 3.7.2",
     packages = find_packages(),
-    install_requires = ["tweepy >= 3.7.0"],
+    install_requires = ["tweepy >= 3.7.0", "numpy >=1.16.2"],
 )
