@@ -44,38 +44,37 @@ class MyStreamListener(tw.StreamListener):
                      print('@' + user_screen_name + ' return ' + str(code))
                  elif 'evaluate' in message:
                      code = eval(message.lstrip('@pybotexec evaluate'))
-                     print(code)
                      print('@' + user_screen_name + ' return ' + str(code))
-                     api.update_status('@' + user_screen_name + ' return ' + str(code), id)
+                     api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id)
                      print('@' + user_screen_name + ' return ' + str(code))
                  elif 'plot' in message:
                      response = random.choice(phrases_plot)
                      x = np.linspace(0, 100, 200)
                      y = eval(message.lstrip('@pybotexec plot'))
                      plt2file(x, y)
-                     api.update_with_media('graph.png', '@' + user_screen_name + response, id)
+                     api.update_with_media('graph.png', '@' + user_screen_name + response + '#PyBotConsole', id)
                  elif 'talk' in message:
-                     response = ' Hello there, what would you like to talk about? :)'
-                     api.update_status('@' + user_screen_name + response, id)
+                     response = ' Hello there, what would you like to talk about? :) '
+                     api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
                  # api.retweet(id)
          except:
              response = random.choice(phrases_error)
-             api.update_status('@' + user_screen_name + response, id)
+             api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
              print('Exception!')
              pass
 
 
-phrases_plot = [' Hi there! Your plot is ready:',
-           ' There you go:',
-           ' It\'s my pleasure to help. Here it\'s your graph ',
-           ' Wow! Nice plot!',
+phrases_plot = [' Hi there! Your plot is ready. ',
+           ' There you go! ',
+           ' It\'s my pleasure to help. Here it\'s your graph. ',
+           ' Wow! Nice plot! ',
            ' Hmm... I\'m not sure about what we\'re seeing here. ',
            ' PyBot reporting for duty! ']
 
-phrases_error = [' I\'m tired, leave me alone! -.-',
-                 ' Compute yourself!',
-                 ' I\'m sorry. I can\'t compute that!',
-                 ' bip bop bip bop',
+phrases_error = [' I\'m tired, leave me alone! -.- ',
+                 ' Compute yourself! ',
+                 ' I\'m sorry. I can\'t compute that! ',
+                 ' bip bop bip bop ',
                  ' Exterminate! Exterminate! ']
 
 myStreamListener = MyStreamListener()
