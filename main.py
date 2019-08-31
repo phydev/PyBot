@@ -1,6 +1,7 @@
 import tweepy as tw
+import numpy as np
 from os import environ
-import time
+
 
 consumer_key = environ['consumer_key']
 consumer_secret = environ['consumer_secret']
@@ -42,6 +43,7 @@ class MyStreamListener(tw.StreamListener):
                 #api.retweet(id)
 
         except:
+            print('Exception!')
             pass
   
 
