@@ -18,8 +18,8 @@ class MyStreamListener(tw.StreamListener):
 
     def on_status(self, status):
 
-        user = status.user.screen_name
-        user_id = api.get_user(screen_name = user)
+        user_screen_name = status.user.screen_name
+        user = api.get_user(screen_name = user)
         id = status.id
         url = 'https://twitter.com/' + user + '/status/' + str(id)
  
@@ -29,15 +29,15 @@ class MyStreamListener(tw.StreamListener):
             status_ext = api.get_status(id=id, tweet_mode='extended')
             message = status_ext.full_text.lower()
             print(message)
-            print(user_id==1009108514655096832)
-            if user_id==1009108514655096832:
+            print(user.id==1009108514655096832)
+            if user.id==1009108514655096832:
                 if 'run' in message:
                    code = exec(message.lstrip('@PyBotExec run'))
                 elif 'evaluate' in message:
                    code = eval(message.lstrip('@PyBotExec evaluate'))
                
-                api.update_status('@'+user+'here is your computation: '+code, id)
-                print('@'+user+'here is your computation: '+code)
+                api.update_status('@'+user_screen_name+'here is your computation: '+code, id)
+                print('@'+user_screen_name+'here is your computation: '+code)
                 #api.retweet(id)
 
         except:
