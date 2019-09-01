@@ -34,8 +34,8 @@ class MyStreamListener(tw.StreamListener):
              status_ext = api.get_status(id=id, tweet_mode='extended')
              message = status_ext.full_text.lower()
              print(message)
-             print(user.id == 1009108514655096832)
-             if user.id == 1009108514655096832:
+             print(str(user.id) in access_list)
+             if str(user.id) in access_list:
                  if 'run' in message:
                      code = exec(message.lstrip('@pybotexec run'))
                      print(code)
@@ -63,6 +63,7 @@ class MyStreamListener(tw.StreamListener):
              print('Exception!')
              pass
 
+access_list = ['1134771227078402048', '1009108514655096832']
 
 phrases_plot = [' Hi there! Your plot is ready. ',
            ' There you go! ',
