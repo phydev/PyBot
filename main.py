@@ -37,11 +37,11 @@ class MyStreamListener(tw.StreamListener):
              print(str(user.id) in access_list)
              if str(user.id) in access_list:
                  if 'run' in message:
-                     code = exec(message.lstrip('@pybotexec run'))
-                     print(code)
-                     print('@' + user_screen_name + ' return ' + str(code))
-                     api.update_status('@' + user_screen_name + ' return ' + str(code), id)
-                     print('@' + user_screen_name + ' return ' + str(code))
+                     exec(message.lstrip('@pybotexec run'))
+                     #print(code)
+                     print('@' + user_screen_name + ' return ' )
+                     api.update_status('@' + user_screen_name + ' executed with success! ' , id)
+                     print('@' + user_screen_name + ' return ' )
                  elif 'evaluate' in message:
                      code = eval(message.lstrip('@pybotexec evaluate'))
                      print('@' + user_screen_name + ' return ' + str(code))
