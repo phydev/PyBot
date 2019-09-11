@@ -27,7 +27,25 @@ def plt2file(x,y):
     plt.savefig('graph.png',dpi=300)
     
     return
-    
+
+def answer_back(message):
+    if 'run' in message:
+        exec(message.lstrip('@pybotexec run'))
+        api.update_status('@' + user_screen_name + ' executed with success! ' , id)
+    elif 'evaluate' in message:
+        code = eval(message.lstrip('@pybotexec evaluate'))
+        api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id)
+    elif 'plot' in message:
+        response = random.choice(phrases_plot)
+        x = np.linspace(0, 100, 200)
+        y = eval(message.lstrip('@pybotexec plot'))
+        plt2file(x, y)
+        api.update_with_media('graph.png', '@' + user_screen_name + response + '#PyBotConsole', id)
+    elif 'talk' in message:
+        response = ' Hello there, what would you like to talk about? :) '
+        api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)      
+    return
+
 class MyStreamListener(tw.StreamListener):
     """
         overriding the class streamListener in tweepy with our demands
@@ -44,42 +62,22 @@ class MyStreamListener(tw.StreamListener):
         user = api.get_user(screen_name=user_screen_name)
         id = status.id
         url = 'https://twitter.com/' + user_screen_name + '/status/' + str(id)
-        try:
-            status_ext = api.get_status(id=id, tweet_mode='extended')
-            message = status_ext.full_text.lower()
-            print(message)
-            print(str(user.id) in access_list)
+        status_ext = api.get_status(id=id, tweet_mode='extended')
+        message = status_ext.full_text.lower()
+        print(message)       
+        print("the user.id is the access list? ", str(user.id) in access_list)
+        try:  
             if str(user.id) in access_list:
-                if 'run' in message:
-                    exec(message.lstrip('@pybotexec run'))
-                    #print(code)
-                    print('@' + user_screen_name + ' return ' )
-                    api.update_status('@' + user_screen_name + ' executed with success! ' , id)
-                    print('@' + user_screen_name + ' return ' )
-                elif 'evaluate' in message:
-                    code = eval(message.lstrip('@pybotexec evaluate'))
-                    print('@' + user_screen_name + ' return ' + str(code))
-                    api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id)
-                    print('@' + user_screen_name + ' return ' + str(code))
-                elif 'plot' in message:
-                    response = random.choice(phrases_plot)
-                    x = np.linspace(0, 100, 200)
-                    y = eval(message.lstrip('@pybotexec plot'))
-                    plt2file(x, y)
-                    api.update_with_media('graph.png', '@' + user_screen_name + response + '#PyBotConsole', id)
-                elif 'talk' in message:
-                    response = ' Hello there, what would you like to talk about? :) '
-                    api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
-                # api.retweet(id)
+                answer_back(message)
         except:
             response = random.choice(phrases_error)
             api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
             print('Exception!')
             pass
 
-print(__name__)
 
 if __name__ == '__main__':
+    print('PyBot is starting')
     access_list = ['1134771227078402048', '1009108514655096832'] # username ids
 
     phrases_plot = [' Hi there! Your plot is ready. ',
