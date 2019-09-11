@@ -40,43 +40,42 @@ class MyStreamListener(tw.StreamListener):
             :param status: tweet JSON object
         """
         
-         user_screen_name = status.user.screen_name
-         user = api.get_user(screen_name=user_screen_name)
-         id = status.id
-         url = 'https://twitter.com/' + user_screen_name + '/status/' + str(id)
-
-         try:
-             status_ext = api.get_status(id=id, tweet_mode='extended')
-             message = status_ext.full_text.lower()
-             print(message)
-             print(str(user.id) in access_list)
-             if str(user.id) in access_list:
-                 if 'run' in message:
-                     exec(message.lstrip('@pybotexec run'))
-                     #print(code)
-                     print('@' + user_screen_name + ' return ' )
-                     api.update_status('@' + user_screen_name + ' executed with success! ' , id)
-                     print('@' + user_screen_name + ' return ' )
-                 elif 'evaluate' in message:
-                     code = eval(message.lstrip('@pybotexec evaluate'))
-                     print('@' + user_screen_name + ' return ' + str(code))
-                     api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id)
-                     print('@' + user_screen_name + ' return ' + str(code))
-                 elif 'plot' in message:
-                     response = random.choice(phrases_plot)
-                     x = np.linspace(0, 100, 200)
-                     y = eval(message.lstrip('@pybotexec plot'))
-                     plt2file(x, y)
-                     api.update_with_media('graph.png', '@' + user_screen_name + response + '#PyBotConsole', id)
-                 elif 'talk' in message:
-                     response = ' Hello there, what would you like to talk about? :) '
-                     api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
-                 # api.retweet(id)
-         except:
-             response = random.choice(phrases_error)
-             api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
-             print('Exception!')
-             pass
+        user_screen_name = status.user.screen_name
+        user = api.get_user(screen_name=user_screen_name)
+        id = status.id
+        url = 'https://twitter.com/' + user_screen_name + '/status/' + str(id)
+        try:
+            status_ext = api.get_status(id=id, tweet_mode='extended')
+            message = status_ext.full_text.lower()
+            print(message)
+            print(str(user.id) in access_list)
+            if str(user.id) in access_list:
+                if 'run' in message:
+                    exec(message.lstrip('@pybotexec run'))
+                    #print(code)
+                    print('@' + user_screen_name + ' return ' )
+                    api.update_status('@' + user_screen_name + ' executed with success! ' , id)
+                    print('@' + user_screen_name + ' return ' )
+                elif 'evaluate' in message:
+                    code = eval(message.lstrip('@pybotexec evaluate'))
+                    print('@' + user_screen_name + ' return ' + str(code))
+                    api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id)
+                    print('@' + user_screen_name + ' return ' + str(code))
+                elif 'plot' in message:
+                    response = random.choice(phrases_plot)
+                    x = np.linspace(0, 100, 200)
+                    y = eval(message.lstrip('@pybotexec plot'))
+                    plt2file(x, y)
+                    api.update_with_media('graph.png', '@' + user_screen_name + response + '#PyBotConsole', id)
+                elif 'talk' in message:
+                    response = ' Hello there, what would you like to talk about? :) '
+                    api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
+                # api.retweet(id)
+        except:
+            response = random.choice(phrases_error)
+            api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
+            print('Exception!')
+            pass
 
 if __name__ == '__main__':
     access_list = ['1134771227078402048', '1009108514655096832'] # username ids
