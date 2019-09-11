@@ -77,6 +77,8 @@ class MyStreamListener(tw.StreamListener):
             print('Exception!')
             pass
 
+print(__name__)
+
 if __name__ == '__main__':
     access_list = ['1134771227078402048', '1009108514655096832'] # username ids
 
