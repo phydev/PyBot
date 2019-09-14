@@ -1,7 +1,6 @@
 import tweepy as tw
 import numpy as np
 import matplotlib.pyplot as plt
-import random
 from os import environ
 
 
@@ -36,7 +35,7 @@ def answer_back(message):
         code = eval(message.lstrip('@pybotexec evaluate'))
         api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id)
     elif 'plot' in message:
-        response = random.choice(phrases_plot)
+        response = np.random.choice(phrases_plot)
         x = np.linspace(0, 100, 200)
         y = eval(message.lstrip('@pybotexec plot'))
         plt2file(x, y)
