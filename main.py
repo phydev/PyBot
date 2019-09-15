@@ -97,3 +97,4 @@ if __name__ == '__main__':
     myStreamListener = MyStreamListener() # declaring the listener
     myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
     myStream.filter(track=track, follow=access_list) # listening
+    print('PyBot finished listenning.')
