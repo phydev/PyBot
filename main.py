@@ -15,6 +15,21 @@ auth = tw.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tw.API(auth)
 
+access_list = ['1134771227078402048', '1009108514655096832'] # username ids
+
+phrases_plot = [' Hi there! Your plot is ready. ',
+       ' There you go! ',
+       ' It\'s my pleasure to help. Here it\'s your graph. ',
+       ' Wow! Nice plot! ',
+       ' Hmm... I\'m not sure about what we\'re seeing here. ',
+       ' PyBot reporting for duty! ']
+
+phrases_error = [' I\'m tired, leave me alone! -.- ',
+             ' Compute yourself! ',
+             ' I\'m sorry. I can\'t compute that! ',
+             ' bip bop bip bop ',
+             ' Exterminate! Exterminate! ']
+
 def plt2file(x,y):
     """ 
         function for ploting
@@ -27,7 +42,7 @@ def plt2file(x,y):
     
     return
 
-def answer_back(message):
+def answer_back(message, user_screen_name, phrases_plot):
     if 'run' in message:
         exec(message.lstrip('@pybotexec run'))
         api.update_status('@' + user_screen_name + ' executed with success! ' , id)
@@ -67,7 +82,7 @@ class MyStreamListener(tw.StreamListener):
         print("the user.id is in the access list? ", str(user.id) in access_list)
         try:  
             if str(user.id) in access_list:
-                answer_back(message)
+                answer_back(message, user_screen_name, phrases_plot)
         except:
             response = np.random.choice(phrases_error)
             api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
@@ -77,20 +92,6 @@ class MyStreamListener(tw.StreamListener):
 
 if __name__ == '__main__':
     print('PyBot is starting')
-    access_list = ['1134771227078402048', '1009108514655096832'] # username ids
-    
-    phrases_plot = [' Hi there! Your plot is ready. ',
-           ' There you go! ',
-           ' It\'s my pleasure to help. Here it\'s your graph. ',
-           ' Wow! Nice plot! ',
-           ' Hmm... I\'m not sure about what we\'re seeing here. ',
-           ' PyBot reporting for duty! ']
-    
-    phrases_error = [' I\'m tired, leave me alone! -.- ',
-                 ' Compute yourself! ',
-                 ' I\'m sorry. I can\'t compute that! ',
-                 ' bip bop bip bop ',
-                 ' Exterminate! Exterminate! ']
     
     response = np.random.choice(phrases_error)
     print(response)
