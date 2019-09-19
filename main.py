@@ -64,7 +64,7 @@ class MyStreamListener(tw.StreamListener):
         status_ext = api.get_status(id=id, tweet_mode='extended')
         message = status_ext.full_text.lower()
         print(message)       
-        print("the user.id is the access list? ", str(user.id) in access_list)
+        print("the user.id is in the access list? ", str(user.id) in access_list)
         try:  
             if str(user.id) in access_list:
                 answer_back(message)
@@ -92,9 +92,9 @@ phrases_error = [' I\'m tired, leave me alone! -.- ',
              ' bip bop bip bop ',
              ' Exterminate! Exterminate! ']
 
-
+response = random.choice(phrases_error)
+print(response)
 track = ['@PyBotExec run', '@PyBotExec exec', '@PyBotExec plot'] # following the keywords
 myStreamListener = MyStreamListener() # declaring the listener
 myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
-myStream.filter(track=track) # listening
-print('PyBot finished listenning.')
+myStream.filter(track=track, follow=access_list) # listening
