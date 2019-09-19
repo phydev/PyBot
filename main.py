@@ -69,32 +69,33 @@ class MyStreamListener(tw.StreamListener):
             if str(user.id) in access_list:
                 answer_back(message)
         except:
-            response = random.choice(phrases_error)
+            response = np.random.choice(phrases_error)
             api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
             print('Exception!')
             pass
 
 
-
-print('PyBot is starting')
-access_list = ['1134771227078402048', '1009108514655096832'] # username ids
-
-phrases_plot = [' Hi there! Your plot is ready. ',
-       ' There you go! ',
-       ' It\'s my pleasure to help. Here it\'s your graph. ',
-       ' Wow! Nice plot! ',
-       ' Hmm... I\'m not sure about what we\'re seeing here. ',
-       ' PyBot reporting for duty! ']
-
-phrases_error = [' I\'m tired, leave me alone! -.- ',
-             ' Compute yourself! ',
-             ' I\'m sorry. I can\'t compute that! ',
-             ' bip bop bip bop ',
-             ' Exterminate! Exterminate! ']
-
-response = random.choice(phrases_error)
-print(response)
-track = ['@PyBotExec run', '@PyBotExec exec', '@PyBotExec plot'] # following the keywords
-myStreamListener = MyStreamListener() # declaring the listener
-myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
-myStream.filter(track=track, follow=access_list) # listening
+if __name__ == '__main__':
+    print('PyBot is starting')
+    access_list = ['1134771227078402048', '1009108514655096832'] # username ids
+    
+    phrases_plot = [' Hi there! Your plot is ready. ',
+           ' There you go! ',
+           ' It\'s my pleasure to help. Here it\'s your graph. ',
+           ' Wow! Nice plot! ',
+           ' Hmm... I\'m not sure about what we\'re seeing here. ',
+           ' PyBot reporting for duty! ']
+    
+    phrases_error = [' I\'m tired, leave me alone! -.- ',
+                 ' Compute yourself! ',
+                 ' I\'m sorry. I can\'t compute that! ',
+                 ' bip bop bip bop ',
+                 ' Exterminate! Exterminate! ']
+    
+    response = np.random.choice(phrases_error)
+    print(response)
+    track = ['@PyBotExec run', '@PyBotExec exec', '@PyBotExec plot'] # following the keywords
+    myStreamListener = MyStreamListener() # declaring the listener
+    myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
+    myStream.filter(track=track, follow=access_list) # listening
+    
