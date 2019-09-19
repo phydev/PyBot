@@ -77,7 +77,7 @@ class MyStreamListener(tw.StreamListener):
 
 if __name__ == '__main__':
     print('PyBot is starting')
-    access_list = '1134771227078402048, 1009108514655096832' # username ids
+    access_list = ['1134771227078402048', '1009108514655096832'] # username ids
 
     phrases_plot = [' Hi there! Your plot is ready. ',
            ' There you go! ',
@@ -96,5 +96,5 @@ if __name__ == '__main__':
     track = ['@PyBotExec run', '@PyBotExec exec', '@PyBotExec plot'] # following the keywords
     myStreamListener = MyStreamListener() # declaring the listener
     myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
-    myStream.filter(track=track, follow=access_list) # listening
+    myStream.filter(track=track) # listening
     print('PyBot finished listenning.')
