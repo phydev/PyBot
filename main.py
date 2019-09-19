@@ -75,26 +75,26 @@ class MyStreamListener(tw.StreamListener):
             pass
 
 
-if __name__ == '__main__':
-    print('PyBot is starting')
-    access_list = ['1134771227078402048', '1009108514655096832'] # username ids
 
-    phrases_plot = [' Hi there! Your plot is ready. ',
-           ' There you go! ',
-           ' It\'s my pleasure to help. Here it\'s your graph. ',
-           ' Wow! Nice plot! ',
-           ' Hmm... I\'m not sure about what we\'re seeing here. ',
-           ' PyBot reporting for duty! ']
+print('PyBot is starting')
+access_list = ['1134771227078402048', '1009108514655096832'] # username ids
 
-    phrases_error = [' I\'m tired, leave me alone! -.- ',
-                 ' Compute yourself! ',
-                 ' I\'m sorry. I can\'t compute that! ',
-                 ' bip bop bip bop ',
-                 ' Exterminate! Exterminate! ']
-    
-    
-    track = ['@PyBotExec run', '@PyBotExec exec', '@PyBotExec plot'] # following the keywords
-    myStreamListener = MyStreamListener() # declaring the listener
-    myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
-    myStream.filter(track=track) # listening
-    print('PyBot finished listenning.')
+phrases_plot = [' Hi there! Your plot is ready. ',
+       ' There you go! ',
+       ' It\'s my pleasure to help. Here it\'s your graph. ',
+       ' Wow! Nice plot! ',
+       ' Hmm... I\'m not sure about what we\'re seeing here. ',
+       ' PyBot reporting for duty! ']
+
+phrases_error = [' I\'m tired, leave me alone! -.- ',
+             ' Compute yourself! ',
+             ' I\'m sorry. I can\'t compute that! ',
+             ' bip bop bip bop ',
+             ' Exterminate! Exterminate! ']
+
+
+track = ['@PyBotExec run', '@PyBotExec exec', '@PyBotExec plot'] # following the keywords
+myStreamListener = MyStreamListener() # declaring the listener
+myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
+myStream.filter(track=track) # listening
+print('PyBot finished listenning.')
