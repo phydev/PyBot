@@ -77,7 +77,7 @@ class MyStreamListener(tw.StreamListener):
 
 if __name__ == '__main__':
     print('PyBot is starting')
-    access_list = ['1134771227078402048', '1009108514655096832'] # username ids
+    access_list = '1134771227078402048, 1009108514655096832' # username ids
 
     phrases_plot = [' Hi there! Your plot is ready. ',
            ' There you go! ',
