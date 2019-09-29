@@ -9,6 +9,7 @@ consumer_key = environ['consumer_key']
 consumer_secret = environ['consumer_secret']
 access_token = environ['access_token']
 access_token_secret = environ['access_token_secret']
+number_of_images = environ['number_of_images']
 
 # authenticating
 auth = tw.OAuthHandler(consumer_key, consumer_secret)
@@ -51,7 +52,7 @@ def answer_back(message, user_screen_name, phrases_plot, id_):
     elif 'evaluate' in message:
         expression = message.lstrip('@pybotexec evaluate')
         if '1/0' in expression:
-              image = str(np.random.randint(4)+1)
+              image = str(np.random.randint(number_of_images)+1)
               api.update_with_media('zeroDivision/zeroDivision'+image+'.jpg','@' + user_screen_name + ' What have you done?! :O #PyBotConsole', id_)
         else:
               code = eval(expression)
