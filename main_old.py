@@ -63,8 +63,8 @@ class MyStreamListener(tw.StreamListener):
                      api.update_status('@' + user_screen_name + response, id_)
                  # api.retweet(id)
          except:
-             print('mai que caralha!')
-             response = 'merda!'#np.random.choice(phrases_error)
+            
+             response = np.random.choice(phrases_error)
              api.update_status('@' + user_screen_name + response, id_)
              print('Exception!')
 
