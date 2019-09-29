@@ -54,10 +54,10 @@ def answer_back(message, user_screen_name, phrases_plot):
         x = np.linspace(0, 100, 200)
         y = eval(message.lstrip('@pybotexec plot'))
         plt2file(x, y)
-        api.update_with_media('graph.png', '@' + user_screen_name + response + '#PyBotConsole', id)
+        api.update_with_media('graph.png', '@' + user_screen_name +' '+  response + ' #PyBotConsole', id)
     elif 'talk' in message:
         response = ' Hello there, what would you like to talk about? :) '
-        api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)      
+        api.update_status('@' + user_screen_name +' '+ response + ' #PyBotConsole', id)      
     return
 
 class MyStreamListener(tw.StreamListener):
@@ -85,7 +85,7 @@ class MyStreamListener(tw.StreamListener):
                 answer_back(message, user_screen_name, phrases_plot)
         except:
             response = np.random.choice(phrases_error)
-            api.update_status('@' + user_screen_name + response + '#PyBotConsole', id)
+            api.update_status('@' + user_screen_name +' '+ response + ' #PyBotConsole', id)
             print('Exception!')
             pass
 
