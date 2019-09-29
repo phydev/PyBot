@@ -15,6 +15,8 @@ auth = tw.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tw.API(auth)
 
+user = api.me()
+
 access_list = ['1134771227078402048', '1009108514655096832'] # username ids
 
 phrases_plot = [' Hi there! Your plot is ready. ',
@@ -47,8 +49,13 @@ def answer_back(message, user_screen_name, phrases_plot, id_):
         exec(message.lstrip('@pybotexec run'))
         api.update_status('@' + user_screen_name + ' executed with success! ' , id_)
     elif 'evaluate' in message:
-        code = eval(message.lstrip('@pybotexec evaluate'))
-        api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id_)
+        expression = message.lstrip('@pybotexec evaluate')
+        if '1/0' in expression:
+              image = str(np.random.randint(4)+1)
+              api.update_with_media('zeroDivision/zeroDivision'+image+'.jpg','@' + user_screen_name + ' What have you done?! :O #PyBotConsole', id_)
+        else:
+              code = eval(expression)
+              api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id_)
     elif 'plot' in message:
         response = np.random.choice(phrases_plot)
         x = np.linspace(0, 100, 200)
@@ -92,9 +99,7 @@ class MyStreamListener(tw.StreamListener):
 
 if __name__ == '__main__':
     print('PyBot is starting')
-    
-    response = np.random.choice(phrases_error)
-    print(response)
+    print('Logged in as', user)
     track = ['@PyBotExec run', '@PyBotExec exec', '@PyBotExec plot'] # following the keywords
     myStreamListener = MyStreamListener() # declaring the listener
     myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
