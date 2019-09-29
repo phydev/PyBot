@@ -86,3 +86,5 @@ myStreamListener = MyStreamListener()
 myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended')
 #api.send_direct_message(recipient_id=1009108514655096832, text='response')
 track = ['@PyBotExec ']
+
+myStream.filter(track=track, follow=access_list)
