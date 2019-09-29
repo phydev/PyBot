@@ -42,22 +42,22 @@ def plt2file(x,y):
     
     return
 
-def answer_back(message, user_screen_name, phrases_plot):
+def answer_back(message, user_screen_name, phrases_plot, id_):
     if 'run' in message:
         exec(message.lstrip('@pybotexec run'))
-        api.update_status('@' + user_screen_name + ' executed with success! ' , id)
+        api.update_status('@' + user_screen_name + ' executed with success! ' , id_)
     elif 'evaluate' in message:
         code = eval(message.lstrip('@pybotexec evaluate'))
-        api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id)
+        api.update_status('@' + user_screen_name + ' return ' + str(code) +' #PyBotConsole', id_)
     elif 'plot' in message:
         response = np.random.choice(phrases_plot)
         x = np.linspace(0, 100, 200)
         y = eval(message.lstrip('@pybotexec plot'))
         plt2file(x, y)
-        api.update_with_media('graph.png', '@' + user_screen_name +' '+  response + ' #PyBotConsole', id)
+        api.update_with_media('graph.png', '@' + user_screen_name +' '+  response + ' #PyBotConsole', id_)
     elif 'talk' in message:
         response = ' Hello there, what would you like to talk about? :) '
-        api.update_status('@' + user_screen_name +' '+ response + ' #PyBotConsole', id)      
+        api.update_status('@' + user_screen_name +' '+ response + ' #PyBotConsole', id_)      
     return
 
 class MyStreamListener(tw.StreamListener):
@@ -74,18 +74,18 @@ class MyStreamListener(tw.StreamListener):
         
         user_screen_name = status.user.screen_name
         user = api.get_user(screen_name=user_screen_name)
-        id = status.id
-        url = 'https://twitter.com/' + user_screen_name + '/status/' + str(id)
-        status_ext = api.get_status(id=id, tweet_mode='extended')
+        id_ = status.id
+        url = 'https://twitter.com/' + user_screen_name + '/status/' + str(id_)
+        status_ext = api.get_status(id=id_, tweet_mode='extended')
         message = status_ext.full_text.lower()
         print(message)       
         print("the user.id is in the access list? ", str(user.id) in access_list)
         try:  
             if str(user.id) in access_list:
-                answer_back(message, user_screen_name, phrases_plot)
+                answer_back(message, user_screen_name, phrases_plot, id_)
         except:
             response = np.random.choice(phrases_error)
-            api.update_status('@' + user_screen_name +' '+ response + ' #PyBotConsole', id)
+            api.update_status('@' + user_screen_name +' '+ response + ' #PyBotConsole', id_)
             print('Exception!')
             pass
 
