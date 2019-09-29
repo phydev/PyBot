@@ -100,7 +100,7 @@ class MyStreamListener(tw.StreamListener):
 
 if __name__ == '__main__':
     print('PyBot is starting')
-    print('Logged in as', user)
+    print('Logged in as ', user.name)
     track = ['@PyBotExec run', '@PyBotExec exec', '@PyBotExec plot'] # following the keywords
     myStreamListener = MyStreamListener() # declaring the listener
     myStream = tw.Stream(auth=api.auth, listener=myStreamListener, tweet_mode='extended') # starting the streamer
