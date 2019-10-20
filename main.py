@@ -1,6 +1,7 @@
 import tweepy as tw
 import numpy as np
 import matplotlib.pyplot as plt
+from get_code import get_code
 from os import environ
 
 
@@ -47,8 +48,14 @@ def plt2file(x,y):
 
 def answer_back(message, user_screen_name, phrases_plot, id_):
     if 'run' in message:
-        exec(message.lstrip('@pybotexec run'))
-        api.update_status('@' + user_screen_name + ' executed with success! ' , id_)
+        if 'from' in message:
+            filename = message.lstrip('@pybotexec run from'))
+            code = get_code('phydev', 'gists', filename)
+            exec(code)                                              
+            api.update_status('@' + user_screen_name + ' executed external code with success! ' , id_)
+        else:
+            exec(message.lstrip('@pybotexec run'))
+            api.update_status('@' + user_screen_name + ' executed with success! ' , id_)
     elif 'evaluate' in message:
         expression = message.lstrip('@pybotexec evaluate')
         if '1/0' in expression:
