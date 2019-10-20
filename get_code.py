@@ -11,7 +11,7 @@ def get_code(username, repository,filename):
     :return content: returns the code 
     """
 
-    url = 'https://api.github.com/repos/'+username+'/'+repository+'/contents/'+filename
+    url = 'https://api.github.com/repos/'+username+'/'+repository+'/contents/'+filename+'.py'
     print(url)
     req = requests.get(url)
     if req.status_code == requests.codes.ok:
