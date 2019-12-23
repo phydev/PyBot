@@ -70,7 +70,7 @@ def answer_back(message, user_screen_name, phrases_plot, id_):
         y = eval(message.lstrip('@pybotexec plot'))
         plt2file(x, y)
         api.update_with_media('graph.png', '@' + user_screen_name +' '+  response + ' #PyBotConsole', id_)
-    elif 'talk' in message:
+    elif 'talk to me!' in message:
         response = ' Hello there, what would you like to talk about? :) '
         api.update_status('@' + user_screen_name +' '+ response + ' #PyBotConsole', id_)      
     return
